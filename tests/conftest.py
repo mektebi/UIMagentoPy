@@ -29,9 +29,6 @@ def config():
 def browser(config):
 
   global driver
-  # if driver is None:
-  #   driver = webdriver.Chrome()
-  # Initialize the WebDriver instance
 
   if config['browser'] == 'Firefox':
     driver = selenium.webdriver.Firefox()
@@ -59,14 +56,6 @@ def browser(config):
   driver.quit()
   return driver
 
-# @pytest.fixture(scope='session', autouse=True)
-# def browser():
-#   global driver
-#   if driver is None:
-#     driver = webdriver.Chrome()
-#   yield driver
-#   driver.quit()
-#   return driver
 
 
 @pytest.mark.hookwrapper
@@ -94,29 +83,3 @@ def pytest_runtest_makereport(item):
 
 def _capture_screenshot(name):
   driver.get_screenshot_as_file(name)
-
-# @pytest.mark.hookwrapper
-# def pytest_runtest_makereport(item, call):
-#   pytest_html = item.config.pluginmanager.getplugin('html')
-#   outcome = yield
-#   report = outcome.get_result()
-#   extra = getattr(report, 'extra', [])
-#   driver = browser;
-#   summary = []
-#   if report.when == 'call':
-#       # always add url to report
-#       extra.append(pytest_html.extras.url('http://www.example.com/'))
-#       _gather_screenshot(item, report, driver, summary, extra)
-#       # extra.append(pytest_html.extras.image("screenshot-2020-06-07_16-57-24.png", mime_type='image/png', extension='png'))
-#       xfail = hasattr(report, 'wasxfail')
-#       if (report.skipped and xfail) or (report.failed and not xfail):
-#         # only add additional html on failure
-#         extra.append(pytest_html.extras.html('<div>Additional HTML</div>'))
-#       report.extra = extra
-#
-# def _gather_screenshot(item, report, driver, summary, extra):
-#   screenshot = driver.get_screenshot_as_base64()
-#   pytest_html = item.config.pluginmanager.getplugin('html')
-#   if pytest_html is not None:
-#     # add screenshot to the html report
-#     extra.append(pytest_html.extras.image(screenshot, 'Screenshot'))
