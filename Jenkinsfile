@@ -8,7 +8,7 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'pipenv run python -m pytest -n 4
+        sh 'pipenv run python -m pytest -n 4'
       }   
     }
   }
