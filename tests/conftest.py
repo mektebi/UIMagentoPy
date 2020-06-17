@@ -7,7 +7,9 @@ import pytest
 from datetime import datetime
 import selenium.webdriver
 import pytest
-driver = None
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+global driver
 
 @pytest.fixture(scope='session', autouse=True)
 def config():
@@ -26,18 +28,22 @@ def config():
 
 
 @pytest.fixture(scope='session', autouse=True)
-def browser(config):
+def browser():
+
+  with open('config.json') as config_file:
+    config = json.load(config_file)
 
   global driver
+
+
 
   if config['browser'] == 'Firefox':
     driver = selenium.webdriver.Firefox()
   elif config['browser'] == 'Chrome':
     driver = selenium.webdriver.Chrome()
+    # driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
   elif config['browser'] == 'Safari':
     driver = selenium.webdriver.Safari()
-  elif config['browser'] == 'Internet Explorer':
-    driver = selenium.webdriver.ie();
   elif config['browser'] == 'Headless Chrome':
     opts = selenium.webdriver.ChromeOptions()
     opts.add_argument('headless')
@@ -82,4 +88,5 @@ def pytest_runtest_makereport(item):
 
 
 def _capture_screenshot(name):
+  global driver
   driver.get_screenshot_as_file(name)
