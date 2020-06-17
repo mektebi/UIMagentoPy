@@ -31,16 +31,15 @@ def browser(config):
   global driver
 
   if config['browser'] == 'Firefox':
-    driver = selenium.webdriver.Firefox()
+    driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.FIREFOX)
   elif config['browser'] == 'Chrome':
     # driver = selenium.webdriver.Chrome()
     driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
   elif config['browser'] == 'Safari':
-    driver = selenium.webdriver.Safari()
+    driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.SAFARI)
   elif config['browser'] == 'Headless Chrome':
-    opts = selenium.webdriver.ChromeOptions()
-    opts.add_argument('headless')
-    driver = selenium.webdriver.Chrome(options=opts)
+    driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
+
   else:
     raise Exception(f'Browser "{config["browser"]}" is not supported')
 
