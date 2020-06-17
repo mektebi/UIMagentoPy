@@ -29,20 +29,22 @@ def config():
 def browser(config):
 
   global driver
+  print(config['browser'])
+  driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
 
-  if config['browser'] == 'Firefox':
-    driver = selenium.webdriver.Firefox()
-  elif config['browser'] == 'Chrome':
-    # driver = selenium.webdriver.Chrome()
-    driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
-  elif config['browser'] == 'Safari':
-    driver = selenium.webdriver.Safari()
-  elif config['browser'] == 'Headless Chrome':
-    opts = selenium.webdriver.ChromeOptions()
-    opts.add_argument('headless')
-    driver = selenium.webdriver.Chrome(options=opts)
-  else:
-    raise Exception(f'Browser "{config["browser"]}" is not supported')
+  # if config['browser'] == 'Firefox':
+  #   driver = selenium.webdriver.Firefox()
+  # elif config['browser'] == 'Chrome':
+  #   # driver = selenium.webdriver.Chrome()
+  #   driver = selenium.webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
+  # elif config['browser'] == 'Safari':
+  #   driver = selenium.webdriver.Safari()
+  # elif config['browser'] == 'Headless Chrome':
+  #   opts = selenium.webdriver.ChromeOptions()
+  #   opts.add_argument('headless')
+  #   driver = selenium.webdriver.Chrome(options=opts)
+  # else:
+  #   raise Exception(f'Browser "{config["browser"]}" is not supported')
 
 
   # Make its calls wait for elements to appear
