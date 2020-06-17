@@ -3,8 +3,6 @@ This module contains shared fixtures.
 """
 
 import json
-import pytest
-from datetime import datetime
 import selenium.webdriver
 import pytest
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -48,8 +46,7 @@ def browser():
     opts = selenium.webdriver.ChromeOptions()
     opts.add_argument('headless')
     driver = selenium.webdriver.Chrome(options=opts)
-  else:
-    raise Exception(f'Browser "{config["browser"]}" is not supported')
+
 
 
   # Make its calls wait for elements to appear
