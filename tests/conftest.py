@@ -26,14 +26,9 @@ def config():
 
 
 @pytest.fixture(scope='session', autouse=True)
-def browser():
-
-  with open('config.json') as config_file:
-    config = json.load(config_file)
+def browser(config):
 
   global driver
-
-
 
   if config['browser'] == 'Firefox':
     driver = selenium.webdriver.Firefox()
