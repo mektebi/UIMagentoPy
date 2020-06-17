@@ -55,7 +55,7 @@ def browser(config):
 
   # Quit the WebDriver instance for the cleanup
   driver.quit()
-  return driver
+
 
 
 
